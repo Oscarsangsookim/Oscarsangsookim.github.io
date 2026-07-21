@@ -25,8 +25,6 @@
     /* 검정(檢定) 녹색 */
     --jade:      #0D6A58;
     --jade-soft: #0D6A5814;
-    /* 인주 — 도장 단 하나에만 */
-    --seal:      #AF3A2C;
 
     --kr: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
           "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
@@ -47,7 +45,6 @@
       --rule-soft: #1D2423;
       --jade:      #45C4A4;
       --jade-soft: #45C4A41A;
-      --seal:      #E2604D;
     }
   }
   :root[data-theme="dark"] {
@@ -60,7 +57,6 @@
     --rule-soft: #1D2423;
     --jade:      #45C4A4;
     --jade-soft: #45C4A41A;
-    --seal:      #E2604D;
   }
   :root[data-theme="light"] {
     --paper:     #E7EAE8;
@@ -72,7 +68,6 @@
     --rule-soft: #D9DEDC;
     --jade:      #0D6A58;
     --jade-soft: #0D6A5814;
-    --seal:      #AF3A2C;
   }
 
   body {
@@ -119,13 +114,6 @@
     font-weight: 800;
     letter-spacing: -.03em;
   }
-  .sec-head .count {
-    font-family: var(--mono);
-    font-size: .75rem;
-    color: var(--ink-faint);
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-  }
   section { padding-block: clamp(3.5rem, 9vw, 6.5rem); }
 
   /* ── 히어로 ────────────────────────────────── */
@@ -164,14 +152,6 @@
     border: 1px solid currentColor;
     border-radius: 2px;
     padding: .15rem .4rem;
-    text-transform: uppercase;
-  }
-  .nameplate .en {
-    font-family: var(--mono);
-    font-size: .6875rem;
-    letter-spacing: .14em;
-    color: var(--ink-faint);
-    margin-left: auto;
     text-transform: uppercase;
   }
 
@@ -238,17 +218,6 @@
     /* 흰 배경이 카드 종이색에 녹아든다 */
     mix-blend-mode: multiply;
   }
-  .idcard .stamp {
-    position: absolute;
-    right: -.5rem;
-    bottom: -.5rem;
-    width: 48%;
-    height: auto;
-    color: #AF3A2C;
-    transform: rotate(-9deg);
-    opacity: .88;
-    pointer-events: none;
-  }
   .idcard figcaption {
     display: flex;
     align-items: baseline;
@@ -286,12 +255,6 @@
     white-space: nowrap;
   }
   .cat-label .bar { flex: 1; height: 1px; background: var(--rule); }
-  .cat-label .n {
-    font-family: var(--mono);
-    font-size: .6875rem;
-    color: var(--ink-faint);
-    font-variant-numeric: tabular-nums;
-  }
 
   /* 괘선을 컨테이너 배경이 아니라 셀 그림자로 그린다.
      그래야 마지막 줄이 덜 찼을 때 빈 칸이 회색 덩어리로 드러나지 않는다. */
@@ -453,6 +416,45 @@
   }
 
   /* ── 벤처 ──────────────────────────────────── */
+  /* 사내벤처 제도 3종 — 9년에 걸친 실제 순서라 차수를 명시한다 */
+  .programs {
+    list-style: none;
+    margin: 0 0 2.5rem;
+    padding: 0;
+    display: grid;
+    gap: .75rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 44rem) { .programs { grid-template-columns: repeat(3, 1fr); } }
+  .programs li {
+    background: var(--jade-soft);
+    border: 1px solid var(--jade);
+    border-radius: 3px;
+    padding: 1.125rem 1.125rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+  }
+  .p-seq {
+    font-size: .6875rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+    color: var(--jade);
+  }
+  .p-name {
+    font-size: clamp(1.25rem, 3.4vw, 1.5rem);
+    font-weight: 800;
+    letter-spacing: -.035em;
+    line-height: 1.2;
+  }
+  .p-meta {
+    font-family: var(--mono);
+    font-size: .6875rem;
+    letter-spacing: .02em;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
   .ventures { display: grid; gap: 1px; background: var(--surface); border: 1px solid var(--rule-soft); }
   @media (min-width: 42rem) { .ventures { grid-template-columns: repeat(2, 1fr); } }
   /* 자격증 그리드와 같은 이유로 괘선은 셀 그림자로 그린다 (홀수 개일 때 빈 칸 방지) */
@@ -533,28 +535,17 @@
     color: inherit;
     padding: 1.125rem 1.25rem;
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
     gap: 1rem;
     transition: background .18s ease;
   }
   .link:hover { background: var(--jade-soft); }
-  .link .k { font-family: var(--mono); font-size: .625rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint); }
+  .link .ico { display: flex; flex-shrink: 0; color: var(--ink-soft); transition: color .18s ease; }
+  .link .ico svg { width: 1.25rem; height: 1.25rem; display: block; }
+  .link:hover .ico { color: var(--jade); }
   .link .v { font-size: .9375rem; font-weight: 700; letter-spacing: -.02em; }
 
-  footer {
-    padding-block: 3rem 4rem;
-    border-top: 1px solid var(--rule-soft);
-    margin-top: 3rem;
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-    font-family: var(--mono);
-    font-size: .6875rem;
-    color: var(--ink-faint);
-    letter-spacing: .06em;
-  }
 
   a:focus-visible, .cert:focus-visible {
     outline: 2px solid var(--jade);
@@ -579,7 +570,6 @@
     <div class="nameplate">
       <span class="kr-name">김상수</span>
       <span class="badge">미스터엑시트</span>
-      <span class="en">Kim Sangsoo</span>
     </div>
 
     <div class="hero-grid">
@@ -600,24 +590,6 @@
         <div class="idcard-photo">
           <img src="portrait.jpg" alt="김상수" width="1536" height="2752"
                onerror="this.style.visibility='hidden'" />
-          <svg class="stamp" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <path id="sealTop" d="M22,100 a78,78 0 0 1 156,0" />
-              <path id="sealBot" d="M28,100 a72,72 0 0 0 144,0" />
-            </defs>
-            <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="5"/>
-            <circle cx="100" cy="100" r="62" fill="none" stroke="currentColor" stroke-width="1.5"/>
-            <text font-family="ui-monospace, Menlo, monospace" font-size="14" letter-spacing="4" fill="currentColor" font-weight="600">
-              <textPath href="#sealTop" startOffset="50%" text-anchor="middle">檢 定 · CERTIFIED</textPath>
-            </text>
-            <text font-family="ui-monospace, Menlo, monospace" font-size="11" letter-spacing="3" fill="currentColor">
-              <textPath href="#sealBot" startOffset="50%" text-anchor="middle">SINCE SEOUL</textPath>
-            </text>
-            <text x="100" y="88" text-anchor="middle" font-size="34" font-weight="900" fill="currentColor"
-                  font-family="-apple-system, 'Apple SD Gothic Neo', sans-serif" letter-spacing="-1">김상수</text>
-            <text x="100" y="122" text-anchor="middle" font-size="21" font-weight="700" fill="currentColor"
-                  font-family="ui-monospace, Menlo, monospace" letter-spacing="2">2001—</text>
-          </svg>
         </div>
         <figcaption>
           <span class="n">김상수</span>
@@ -634,14 +606,12 @@
   <div class="wrap">
     <div class="sec-head rise">
       <h2>보유 자격</h2>
-      <span class="count">15 취득 · 1 진행 중</span>
     </div>
 
     <div class="cat rise">
       <div class="cat-label">
         <span class="t">모빌리티 · Mobility</span>
         <span class="bar"></span>
-        <span class="n">10</span>
       </div>
       <div class="certs">
         <div class="cert"><div class="top"><span class="idx">01</span><span class="domain" title="육상">陸</span></div><span class="name">제1종 대형</span><span class="grade">운전면허</span></div>
@@ -666,7 +636,6 @@
       <div class="cat-label">
         <span class="t">자산 · 시장 · Asset &amp; Market</span>
         <span class="bar"></span>
-        <span class="n">4</span>
       </div>
       <div class="certs">
         <div class="cert"><div class="top"><span class="idx">11</span></div><span class="name">투자자산운용사</span><span class="grade">금융투자협회</span></div>
@@ -680,7 +649,6 @@
       <div class="cat-label">
         <span class="t">언어 · Language</span>
         <span class="bar"></span>
-        <span class="n">1</span>
       </div>
       <div class="single">
         <span class="idx">15</span>
@@ -693,7 +661,6 @@
       <div class="cat-label">
         <span class="t">지금 · In Progress</span>
         <span class="bar"></span>
-        <span class="n">1</span>
       </div>
       <div class="single wip">
         <span class="dot" aria-hidden="true"></span>
@@ -732,7 +699,6 @@
   <div class="wrap">
     <div class="sec-head rise">
       <h2>경력</h2>
-      <span class="count">SK GROUP · 2001—</span>
     </div>
 
     <div class="era rise">
@@ -801,10 +767,31 @@
   <div class="wrap">
     <div class="sec-head rise">
       <h2>사내벤처 제도를 세 번 설계했습니다</h2>
-      <span class="count">HAPPY TRY · T두드림 · PLANET X</span>
     </div>
     <p class="lede rise" style="margin-top:0; margin-bottom:2rem">
-      한 번은 운이지만 세 번이면 방법입니다. 그 제도 위에서 멘토링한 팀들.
+      한 번은 운이지만 세 번이면 방법입니다.
+    </p>
+
+    <ol class="programs rise">
+      <li>
+        <span class="p-seq">첫 번째</span>
+        <span class="p-name">Happy Try</span>
+        <span class="p-meta">2007 — 2008 · SK텔레콤</span>
+      </li>
+      <li>
+        <span class="p-seq">두 번째</span>
+        <span class="p-name">T두드림</span>
+        <span class="p-meta">2009 — 2011 · SK텔레콤</span>
+      </li>
+      <li>
+        <span class="p-seq">세 번째</span>
+        <span class="p-name">Planet X</span>
+        <span class="p-meta">2011 — 2016 · SK플래닛</span>
+      </li>
+    </ol>
+
+    <p class="lede rise" style="margin-top:0; margin-bottom:1.25rem">
+      그 제도 위에서 멘토링한 팀들.
     </p>
     <div class="ventures rise">
       <div class="venture">
@@ -837,7 +824,6 @@
   <div class="wrap">
     <div class="sec-head rise">
       <h2>학력</h2>
-      <span class="count">고창 → 서울</span>
     </div>
     <div class="edu rise">
       <span class="node">고창초</span><span class="arrow">→</span>
@@ -855,8 +841,7 @@
 <!-- ══ 채널 ════════════════════════════════════ -->
 <section class="contact" id="contact">
   <div class="wrap">
-    <span class="eyebrow kr rise">읽어주셔서 고맙습니다</span>
-    <h2 class="rise" style="margin:1rem 0 1rem; font-size:clamp(1.375rem,4.5vw,2rem); font-weight:900; letter-spacing:-.04em; text-wrap:balance">
+    <h2 class="rise" style="margin:0 0 1rem; font-size:clamp(1.375rem,4.5vw,2rem); font-weight:900; letter-spacing:-.04em; text-wrap:balance">
       셀프브랜딩으로 나를 다시 쓰다
     </h2>
     <p class="lede rise" style="margin:0 0 1.75rem">
@@ -881,21 +866,26 @@
     </a>
 
     <div class="links rise">
-      <a class="link" href="https://www.youtube.com/@%EB%A9%B4%ED%97%88%EC%99%95" target="_blank" rel="noopener">
-        <span class="k">YouTube</span><span class="v">@면허왕</span>
+      <a class="link" href="https://www.youtube.com/@%EB%A9%B4%ED%97%88%EC%99%95" target="_blank" rel="noopener" aria-label="유튜브 채널 면허왕">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg>
+        </span>
+        <span class="v">@면허왕</span>
       </a>
-      <a class="link" href="https://instagram.com/oscarsangsookim" target="_blank" rel="noopener">
-        <span class="k">Instagram</span><span class="v">@oscarsangsookim</span>
+      <a class="link" href="https://instagram.com/oscarsangsookim" target="_blank" rel="noopener" aria-label="인스타그램 oscarsangsookim">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.12 1.39C1.35 2.68.93 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.39 2.12.66.66 1.33 1.08 2.12 1.39.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.73 2.12-1.39.66-.66 1.08-1.33 1.39-2.12.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.31-.79-.73-1.46-1.39-2.12C21.32 1.35 20.65.93 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg>
+        </span>
+        <span class="v">@oscarsangsookim</span>
       </a>
-      <a class="link" href="mailto:superssk74@gmail.com">
-        <span class="k">Email</span><span class="v">superssk74@gmail.com</span>
+      <a class="link" href="mailto:superssk74@gmail.com" aria-label="이메일 보내기">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4.5" width="20" height="15" rx="2.2"/><path d="m2.8 6.6 9.2 6.8 9.2-6.8"/></svg>
+        </span>
+        <span class="v">superssk74@gmail.com</span>
       </a>
     </div>
 
-    <footer>
-      <span>김상수 · KIM SANGSOO</span>
-      <span>SK 25년 · 자격 15</span>
-    </footer>
   </div>
 </section>
 
