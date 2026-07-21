@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>김상수 — 제대로 알고 싶으면, 시험을 봅니다</title>
+<meta name="description" content="자격증은 목표가 아니라 공부법입니다. SK 25년, 낯선 분야를 계속 맡아온 방법. 김상수." />
+<meta property="og:title" content="김상수 — 제대로 알고 싶으면, 시험을 봅니다" />
+<meta property="og:description" content="자격증은 목표가 아니라 공부법입니다. 그렇게 15번." />
+<meta property="og:type" content="profile" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; }
+
+  :root {
+    /* 종이 — 청록으로 살짝 기운 중성색 */
+    --paper:     #E7EAE8;
+    --surface:   #F3F5F4;
+    --ink:       #0F1614;
+    --ink-soft:  #4C5754;
+    --ink-faint: #7C8784;
+    --rule:      #C7CECB;
+    --rule-soft: #D9DEDC;
+    /* 검정(檢定) 녹색 */
+    --jade:      #0D6A58;
+    --jade-soft: #0D6A5814;
+    /* 인주 — 도장 단 하나에만 */
+    --seal:      #AF3A2C;
+
+    --kr: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+          "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, "Roboto Mono", monospace;
+
+    --pad: clamp(1.25rem, 5vw, 5rem);
+    --max: 68rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:     #0D1211;
+      --surface:   #151A19;
+      --ink:       #E7EAE8;
+      --ink-soft:  #97A3A0;
+      --ink-faint: #6B7573;
+      --rule:      #29312F;
+      --rule-soft: #1D2423;
+      --jade:      #45C4A4;
+      --jade-soft: #45C4A41A;
+      --seal:      #E2604D;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:     #0D1211;
+    --surface:   #151A19;
+    --ink:       #E7EAE8;
+    --ink-soft:  #97A3A0;
+    --ink-faint: #6B7573;
+    --rule:      #29312F;
+    --rule-soft: #1D2423;
+    --jade:      #45C4A4;
+    --jade-soft: #45C4A41A;
+    --seal:      #E2604D;
+  }
+  :root[data-theme="light"] {
+    --paper:     #E7EAE8;
+    --surface:   #F3F5F4;
+    --ink:       #0F1614;
+    --ink-soft:  #4C5754;
+    --ink-faint: #7C8784;
+    --rule:      #C7CECB;
+    --rule-soft: #D9DEDC;
+    --jade:      #0D6A58;
+    --jade-soft: #0D6A5814;
+    --seal:      #AF3A2C;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--kr);
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--pad); }
+
+  /* ── 공통 조판 ─────────────────────────────── */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: .6875rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+  }
+  /* 한글은 영문 기준 자간이 과해 흩어져 보인다 */
+  .eyebrow.kr {
+    font-family: var(--kr);
+    font-size: .75rem;
+    letter-spacing: .02em;
+    text-transform: none;
+    font-weight: 600;
+  }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: .75rem;
+    border-bottom: 1.5px solid var(--ink);
+    margin-bottom: 2rem;
+  }
+  .sec-head h2 {
+    margin: 0;
+    font-size: clamp(1.125rem, 3vw, 1.375rem);
+    font-weight: 800;
+    letter-spacing: -.03em;
+  }
+  .sec-head .count {
+    font-family: var(--mono);
+    font-size: .75rem;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  section { padding-block: clamp(3.5rem, 9vw, 6.5rem); }
+
+  /* ── 히어로 ────────────────────────────────── */
+  .hero {
+    padding-block: clamp(3rem, 10vw, 6rem) clamp(3.5rem, 9vw, 6rem);
+    position: relative;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2rem, 5vw, 3rem);
+  }
+  @media (min-width: 56rem) {
+    .hero-grid { grid-template-columns: minmax(0,1fr) 16rem; align-items: start; }
+  }
+
+  .nameplate {
+    display: flex;
+    align-items: baseline;
+    gap: .75rem;
+    flex-wrap: wrap;
+    padding-bottom: 1.5rem;
+    margin-bottom: clamp(2rem, 5vw, 3rem);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nameplate .kr-name {
+    font-size: 1.0625rem;
+    font-weight: 800;
+    letter-spacing: -.02em;
+  }
+  .nameplate .badge {
+    font-family: var(--mono);
+    font-size: .625rem;
+    letter-spacing: .1em;
+    color: var(--jade);
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    padding: .15rem .4rem;
+    text-transform: uppercase;
+  }
+  .nameplate .en {
+    font-family: var(--mono);
+    font-size: .6875rem;
+    letter-spacing: .14em;
+    color: var(--ink-faint);
+    margin-left: auto;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.125rem, 8.5vw, 4.25rem);
+    font-weight: 900;
+    line-height: 1.14;
+    letter-spacing: -.045em;
+    text-wrap: balance;
+  }
+  h1 .line2 { display: block; }
+  h1 .num {
+    font-family: var(--mono);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: var(--jade);
+    font-variant-numeric: tabular-nums;
+  }
+  .lede {
+    margin: clamp(1.75rem, 4vw, 2.25rem) 0 0;
+    max-width: 34rem;
+    font-size: clamp(.9375rem, 2.4vw, 1.0625rem);
+    line-height: 1.8;
+    color: var(--ink-soft);
+  }
+  .lede strong { color: var(--ink); font-weight: 700; }
+
+  /* 증명 카드 — 사진 위에 인장을 찍는다.
+     카드는 두 테마 모두 종이색으로 고정한다: 흰 배경 흑백 사진을
+     어두운 바탕에 그대로 놓으면 눈부신 흰 덩어리가 되기 때문. */
+  .idcard {
+    --card:      #F1F3F2;
+    --card-rule: #D1D7D4;
+    --card-ink:  #0F1614;
+    --card-soft: #6E7A76;
+    margin: 0;
+    justify-self: start;
+    width: min(16rem, 82%);
+    background: var(--card);
+    border: 1px solid var(--card-rule);
+    border-radius: 3px;
+    padding: .75rem .75rem .875rem;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,.07);
+  }
+  @media (min-width: 56rem) { .idcard { justify-self: end; width: 100%; } }
+
+  .idcard-photo {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: var(--card);
+  }
+  .idcard-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 42%;
+    filter: grayscale(1) contrast(1.04);
+    /* 흰 배경이 카드 종이색에 녹아든다 */
+    mix-blend-mode: multiply;
+  }
+  .idcard .stamp {
+    position: absolute;
+    right: -.5rem;
+    bottom: -.5rem;
+    width: 48%;
+    height: auto;
+    color: #AF3A2C;
+    transform: rotate(-9deg);
+    opacity: .88;
+    pointer-events: none;
+  }
+  .idcard figcaption {
+    display: flex;
+    align-items: baseline;
+    gap: .5rem;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--card-rule);
+    padding-top: .625rem;
+  }
+  .idcard .n { font-size: .875rem; font-weight: 800; letter-spacing: -.02em; color: var(--card-ink); }
+  .idcard .m {
+    font-family: var(--mono);
+    font-size: .5625rem;
+    letter-spacing: .1em;
+    color: var(--card-soft);
+    text-transform: uppercase;
+  }
+  .idcard .m.last { margin-left: auto; }
+
+  /* ── 자격증 그리드 ──────────────────────────── */
+  .cat { margin-bottom: 2.5rem; }
+  .cat:last-child { margin-bottom: 0; }
+  .cat-label {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: 1rem;
+  }
+  .cat-label .t {
+    font-family: var(--mono);
+    font-size: .6875rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .cat-label .bar { flex: 1; height: 1px; background: var(--rule); }
+  .cat-label .n {
+    font-family: var(--mono);
+    font-size: .6875rem;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* 괘선을 컨테이너 배경이 아니라 셀 그림자로 그린다.
+     그래야 마지막 줄이 덜 찼을 때 빈 칸이 회색 덩어리로 드러나지 않는다. */
+  .certs { display: grid; gap: 1px; background: var(--surface); border: 1px solid var(--rule-soft); grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 40rem) { .certs { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 60rem) { .certs { grid-template-columns: repeat(5, 1fr); } }
+
+  .cert {
+    background: var(--surface);
+    box-shadow: 0 0 0 1px var(--rule-soft);
+    padding: 1rem .875rem 1.125rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    min-height: 6.25rem;
+    transition: background .18s ease;
+  }
+  .cert:hover { background: var(--jade-soft); }
+  .cert .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+  }
+  .cert .idx {
+    font-family: var(--mono);
+    font-size: .625rem;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .cert .domain {
+    font-size: .625rem;
+    font-weight: 700;
+    line-height: 1;
+    width: 1.125rem;
+    height: 1.125rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--jade);
+    color: var(--jade);
+    border-radius: 50%;
+  }
+  .cert .name {
+    font-size: .875rem;
+    font-weight: 700;
+    letter-spacing: -.025em;
+    line-height: 1.4;
+    margin-top: auto;
+  }
+  .cert .grade {
+    font-family: var(--mono);
+    font-size: .625rem;
+    letter-spacing: .06em;
+    color: var(--ink-faint);
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+    font-family: var(--mono);
+    font-size: .6875rem;
+    color: var(--ink-faint);
+  }
+  .legend span b { color: var(--jade); font-weight: 700; }
+
+  /* 단일 항목 카테고리는 그리드 대신 한 줄로 */
+  .single {
+    background: var(--surface);
+    border: 1px solid var(--rule-soft);
+    padding: 1rem .875rem;
+    display: flex;
+    align-items: baseline;
+    gap: .875rem;
+  }
+  .single .idx { font-family: var(--mono); font-size: .625rem; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+  .single .name { font-size: .875rem; font-weight: 700; letter-spacing: -.025em; }
+  .single .grade { font-family: var(--mono); font-size: .6875rem; letter-spacing: .06em; color: var(--ink-faint); margin-left: auto; }
+
+  /* 진행 중 — 이 페이지가 과거 기록이 아니라는 표시 */
+  .single.wip {
+    background: none;
+    border: 1px dashed var(--jade);
+  }
+  .single.wip .idx,
+  .single.wip .name { color: var(--jade); }
+  .single.wip .grade { color: var(--jade); }
+  .single.wip .dot {
+    width: .375rem; height: .375rem; border-radius: 50%;
+    background: var(--jade); flex-shrink: 0;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
+  @media (prefers-reduced-motion: reduce) { .single.wip .dot { animation: none; } }
+
+  /* ── 논지 ──────────────────────────────────── */
+  .thesis { background: var(--surface); border-block: 1px solid var(--rule); }
+  .thesis blockquote {
+    margin: 0;
+    max-width: 44rem;
+    font-size: clamp(1.25rem, 4vw, 1.875rem);
+    font-weight: 800;
+    letter-spacing: -.035em;
+    line-height: 1.45;
+    text-wrap: balance;
+  }
+  .thesis .after {
+    margin: 1.75rem 0 0;
+    max-width: 38rem;
+    color: var(--ink-soft);
+    font-size: clamp(.9375rem, 2.3vw, 1rem);
+    line-height: 1.85;
+  }
+  .thesis .after + .after { margin-top: 1.125rem; }
+  .thesis .after strong { color: var(--ink); font-weight: 700; }
+
+  /* ── 경력 원장 ─────────────────────────────── */
+  .era { border-bottom: 1px solid var(--rule-soft); padding-block: 1.75rem; }
+  .era:first-of-type { border-top: 1px solid var(--rule-soft); }
+  .era-grid { display: grid; grid-template-columns: 1fr; gap: .875rem; }
+  @media (min-width: 44rem) {
+    .era-grid { grid-template-columns: 9.5rem minmax(0,1fr); gap: 2rem; }
+  }
+  .era .years {
+    font-family: var(--mono);
+    font-size: .8125rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--jade);
+    font-weight: 600;
+    letter-spacing: .01em;
+  }
+  .era h3 {
+    margin: 0 0 .75rem;
+    font-size: 1.0625rem;
+    font-weight: 800;
+    letter-spacing: -.03em;
+  }
+  .era ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .5rem; }
+  .era li {
+    display: grid;
+    grid-template-columns: 3.25rem minmax(0,1fr);
+    gap: .875rem;
+    font-size: .875rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .era li .yr {
+    font-family: var(--mono);
+    font-size: .6875rem;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+    padding-top: .2rem;
+  }
+  .era li mark {
+    background: none;
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  /* ── 벤처 ──────────────────────────────────── */
+  .ventures { display: grid; gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); }
+  @media (min-width: 42rem) { .ventures { grid-template-columns: repeat(2, 1fr); } }
+  .venture { background: var(--surface); padding: 1.375rem 1.25rem; display: flex; flex-direction: column; gap: .375rem; }
+  .venture .vn {
+    font-family: var(--mono);
+    font-size: .9375rem;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    color: var(--ink);
+  }
+  .venture p { margin: 0; font-size: .8125rem; color: var(--ink-soft); line-height: 1.6; }
+  .ventures-note { margin: 1rem 0 0; font-size: .8125rem; color: var(--ink-faint); }
+
+  /* ── 학력 ──────────────────────────────────── */
+  .edu { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .edu .node {
+    font-size: .8125rem;
+    font-weight: 600;
+    letter-spacing: -.02em;
+    padding: .4rem .7rem;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    background: var(--surface);
+  }
+  .edu .node.grad { border-color: var(--jade); color: var(--jade); }
+  .edu .arrow { color: var(--ink-faint); font-family: var(--mono); font-size: .75rem; }
+  .edu-note { margin: 1.25rem 0 0; font-size: .8125rem; color: var(--ink-soft); max-width: 36rem; line-height: 1.75; }
+
+  /* ── 채널 ──────────────────────────────────── */
+  .contact { border-top: 1.5px solid var(--ink); }
+  .topics {
+    list-style: none;
+    margin: 0 0 1.75rem;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+  }
+  .topics li {
+    font-size: .8125rem;
+    font-weight: 600;
+    letter-spacing: -.02em;
+    color: var(--jade);
+    border: 1px solid var(--jade);
+    border-radius: 2px;
+    padding: .3rem .625rem;
+  }
+  .cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    background: var(--jade);
+    color: var(--paper);
+    text-decoration: none;
+    padding: 1.5rem clamp(1.25rem, 4vw, 2rem);
+    border-radius: 3px;
+    transition: transform .18s ease, filter .18s ease;
+  }
+  .cta:hover { filter: brightness(1.08); transform: translateY(-2px); }
+  .cta .l { display: flex; flex-direction: column; gap: .3rem; }
+  .cta .k {
+    font-family: var(--mono);
+    font-size: .625rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    opacity: .8;
+  }
+  .cta .v { font-size: clamp(1.0625rem, 3.4vw, 1.375rem); font-weight: 800; letter-spacing: -.03em; }
+  .cta .arw { font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
+
+  .links { display: grid; gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); margin-top: 1.5rem; }
+  @media (min-width: 34rem) { .links { grid-template-columns: repeat(2, 1fr); } }
+  .link {
+    background: var(--surface);
+    text-decoration: none;
+    color: inherit;
+    padding: 1.125rem 1.25rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: background .18s ease;
+  }
+  .link:hover { background: var(--jade-soft); }
+  .link .k { font-family: var(--mono); font-size: .625rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint); }
+  .link .v { font-size: .9375rem; font-weight: 700; letter-spacing: -.02em; }
+
+  footer {
+    padding-block: 3rem 4rem;
+    border-top: 1px solid var(--rule-soft);
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: .6875rem;
+    color: var(--ink-faint);
+    letter-spacing: .06em;
+  }
+
+  a:focus-visible, .cert:focus-visible {
+    outline: 2px solid var(--jade);
+    outline-offset: 3px;
+  }
+
+  /* ── 등장 ──────────────────────────────────── */
+  .rise { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+  .rise.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .rise { opacity: 1; transform: none; transition: none; }
+    .cta, .cert, .link { transition: none; }
+    .seal svg { transform: rotate(-8deg); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ 히어로 ══════════════════════════════════ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="nameplate">
+      <span class="kr-name">김상수</span>
+      <span class="badge">면허왕</span>
+      <span class="en">Kim Sangsoo</span>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <h1>
+          제대로 알고 싶으면,
+          <span class="line2">시험을 봅니다.</span>
+          <span class="line2">그렇게 <span class="num">15</span>번.</span>
+        </h1>
+        <p class="lede">
+          자격증은 제 목표가 아니라 <strong>공부법</strong>입니다.
+          시험을 걸어두면 끝까지 파고들게 되고, 결과가 공식적으로 남으니까요.
+          SK에서 25년, 낯선 분야를 계속 맡아온 방법이기도 합니다.
+        </p>
+      </div>
+
+      <figure class="idcard">
+        <div class="idcard-photo">
+          <img src="portrait.jpg" alt="김상수" width="1536" height="2752"
+               onerror="this.style.visibility='hidden'" />
+          <svg class="stamp" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <path id="sealTop" d="M22,100 a78,78 0 0 1 156,0" />
+              <path id="sealBot" d="M28,100 a72,72 0 0 0 144,0" />
+            </defs>
+            <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="5"/>
+            <circle cx="100" cy="100" r="62" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <text font-family="ui-monospace, Menlo, monospace" font-size="14" letter-spacing="4" fill="currentColor" font-weight="600">
+              <textPath href="#sealTop" startOffset="50%" text-anchor="middle">檢 定 · CERTIFIED</textPath>
+            </text>
+            <text font-family="ui-monospace, Menlo, monospace" font-size="11" letter-spacing="3" fill="currentColor">
+              <textPath href="#sealBot" startOffset="50%" text-anchor="middle">SINCE SEOUL</textPath>
+            </text>
+            <text x="100" y="88" text-anchor="middle" font-size="34" font-weight="900" fill="currentColor"
+                  font-family="-apple-system, 'Apple SD Gothic Neo', sans-serif" letter-spacing="-1">김상수</text>
+            <text x="100" y="122" text-anchor="middle" font-size="21" font-weight="700" fill="currentColor"
+                  font-family="ui-monospace, Menlo, monospace" letter-spacing="2">2001—</text>
+          </svg>
+        </div>
+        <figcaption>
+          <span class="n">김상수</span>
+          <span class="m">Kim Sangsoo</span>
+          <span class="m last">SK · 2001—</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<!-- ══ 자격증 ══════════════════════════════════ -->
+<section id="certs">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <h2>보유 자격</h2>
+      <span class="count">15 취득 · 1 진행 중</span>
+    </div>
+
+    <div class="cat rise">
+      <div class="cat-label">
+        <span class="t">모빌리티 · Mobility</span>
+        <span class="bar"></span>
+        <span class="n">10</span>
+      </div>
+      <div class="certs">
+        <div class="cert"><div class="top"><span class="idx">01</span><span class="domain" title="육상">陸</span></div><span class="name">제1종 대형</span><span class="grade">운전면허</span></div>
+        <div class="cert"><div class="top"><span class="idx">02</span><span class="domain" title="육상">陸</span></div><span class="name">대형견인</span><span class="grade">운전면허</span></div>
+        <div class="cert"><div class="top"><span class="idx">03</span><span class="domain" title="육상">陸</span></div><span class="name">구난차</span><span class="grade">운전면허</span></div>
+        <div class="cert"><div class="top"><span class="idx">04</span><span class="domain" title="육상">陸</span></div><span class="name">제2종 소형</span><span class="grade">운전면허</span></div>
+        <div class="cert"><div class="top"><span class="idx">05</span><span class="domain" title="육상">陸</span></div><span class="name">버스운전</span><span class="grade">자격</span></div>
+        <div class="cert"><div class="top"><span class="idx">06</span><span class="domain" title="육상">陸</span></div><span class="name">화물운송</span><span class="grade">자격</span></div>
+        <div class="cert"><div class="top"><span class="idx">07</span><span class="domain" title="육상">陸</span></div><span class="name">택시운전</span><span class="grade">자격 · 서울시</span></div>
+        <div class="cert"><div class="top"><span class="idx">08</span><span class="domain" title="육상">陸</span></div><span class="name">지게차</span><span class="grade">기능사</span></div>
+        <div class="cert"><div class="top"><span class="idx">09</span><span class="domain" title="수상">水</span></div><span class="name">동력수상레저</span><span class="grade">2급</span></div>
+        <div class="cert"><div class="top"><span class="idx">10</span><span class="domain" title="항공">空</span></div><span class="name">대형드론</span><span class="grade">1종</span></div>
+      </div>
+      <div class="legend">
+        <span><b>陸</b> 육상 8</span>
+        <span><b>水</b> 수상 1</span>
+        <span><b>空</b> 항공 1</span>
+      </div>
+    </div>
+
+    <div class="cat rise">
+      <div class="cat-label">
+        <span class="t">자산 · 시장 · Asset &amp; Market</span>
+        <span class="bar"></span>
+        <span class="n">4</span>
+      </div>
+      <div class="certs">
+        <div class="cert"><div class="top"><span class="idx">11</span></div><span class="name">투자자산운용사</span><span class="grade">금융투자협회</span></div>
+        <div class="cert"><div class="top"><span class="idx">12</span></div><span class="name">투자권유자문인력</span><span class="grade">증권 · 파생상품</span></div>
+        <div class="cert"><div class="top"><span class="idx">13</span></div><span class="name">공인중개사</span><span class="grade">국가전문자격</span></div>
+        <div class="cert"><div class="top"><span class="idx">14</span></div><span class="name">유통관리사</span><span class="grade">2급</span></div>
+      </div>
+    </div>
+
+    <div class="cat rise">
+      <div class="cat-label">
+        <span class="t">언어 · Language</span>
+        <span class="bar"></span>
+        <span class="n">1</span>
+      </div>
+      <div class="single">
+        <span class="idx">15</span>
+        <span class="name">TOEIC</span>
+        <span class="grade">845</span>
+      </div>
+    </div>
+
+    <div class="cat rise">
+      <div class="cat-label">
+        <span class="t">지금 · In Progress</span>
+        <span class="bar"></span>
+        <span class="n">1</span>
+      </div>
+      <div class="single wip">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="idx">16</span>
+        <span class="name">보컬 중급 과정</span>
+        <span class="grade">준비 중</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 논지 ════════════════════════════════════ -->
+<section class="thesis">
+  <div class="wrap">
+    <span class="eyebrow kr rise">왜 이렇게 사느냐 하면</span>
+    <blockquote class="rise" style="margin-top:1.25rem">
+      새로운 분야를 만나면, 저는 시험부터 등록합니다.
+      대충 아는 상태로 멈추지 않게 만드는 가장 확실한 장치니까요.
+    </blockquote>
+    <p class="after rise">
+      회계로 시작해 음원, 기업문화, 사내벤처, 미디어까지.
+      SK에서 25년간 맡은 일은 매번 낯선 영역이었습니다.
+      그때마다 살아남은 방법이 이것이었고, 자격증 15개는 그 습관이
+      회사 밖에서 남긴 흔적입니다.
+    </p>
+    <p class="after rise">
+      그래서 지금은 <strong>보컬 중급 과정</strong>을 준비하고 있습니다.
+      25년차에 노래를 배우는 게 뜬금없어 보일 수도 있지만,
+      회계를 하다 음원 사업으로 옮겨갔던 때와 저에게는 똑같은 일입니다.
+    </p>
+  </div>
+</section>
+
+<!-- ══ 경력 ════════════════════════════════════ -->
+<section id="career">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <h2>경력</h2>
+      <span class="count">SK GROUP · 2001—</span>
+    </div>
+
+    <div class="era rise">
+      <div class="era-grid">
+        <div class="years">2016 — 현재</div>
+        <div>
+          <h3>SK브로드밴드</h3>
+          <ul>
+            <li><span class="yr">총괄</span><span><mark>B tv 고객 대상 모바일 B tv 사업 총괄</mark></span></li>
+            <li><span class="yr">콘텐츠</span><span>VOD 콘텐츠 수급 · FAST 채널 기획 및 수급</span></li>
+            <li><span class="yr">규제</span><span>IPTV 사업 재허가 및 이행점검 대응</span></li>
+            <li><span class="yr">사업</span><span>B tv plus 사업기획 · 운영 · 마케팅</span></li>
+            <li><span class="yr">전략</span><span>TV앱 퍼블리싱 전략 수립, 제휴 마케팅 및 신규 애플리케이션 기획</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="era rise">
+      <div class="era-grid">
+        <div class="years">2016</div>
+        <div>
+          <h3>SK테크엑스</h3>
+          <ul>
+            <li><span class="yr">액셀</span><span>미디어 스타트업 액셀러레이팅</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="era rise">
+      <div class="era-grid">
+        <div class="years">2011 — 2016</div>
+        <div>
+          <h3>SK플래닛</h3>
+          <ul>
+            <li><span class="yr">제도</span><span><mark>사내벤처 Planet X 기획 · 운영 · 고도화</mark></span></li>
+            <li><span class="yr">제도</span><span>사내 아이디에이션 제도 기획 · 운영 · 고도화를 통한 혁신 기업문화 내재화 및 신규 사업 발굴</span></li>
+            <li><span class="yr">멘토링</span><span>사내벤처 멘토링 — RecoPick, Weatherpong, NearKids, Planett 외</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="era rise">
+      <div class="era-grid">
+        <div class="years">2001 — 2011</div>
+        <div>
+          <h3>SK텔레콤</h3>
+          <ul>
+            <li><span class="yr">09—11</span><span><mark>사내벤처 T두드림 기획 · 운영 · 고도화</mark></span></li>
+            <li><span class="yr">07—08</span><span><mark>사내벤처 Happy Try 기획 · 운영</mark></span></li>
+            <li><span class="yr">2006</span><span>Top Management 수행</span></li>
+            <li><span class="yr">2005</span><span>디지털 음원 사업 — 컬러링 · 벨소리</span></li>
+            <li><span class="yr">2004</span><span>기업문화 에반젤리스트 · SKMS 퍼실리테이터</span></li>
+            <li><span class="yr">01—03</span><span>전사 고정자산 회계, 감가상각 시부인, 법인세 세무조정</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 벤처 ════════════════════════════════════ -->
+<section id="ventures">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <h2>사내벤처 제도를 세 번 설계했습니다</h2>
+      <span class="count">HAPPY TRY · T두드림 · PLANET X</span>
+    </div>
+    <p class="lede rise" style="margin-top:0; margin-bottom:2rem">
+      한 번은 운이지만 세 번이면 방법입니다. 그 제도 위에서 멘토링한 팀들.
+    </p>
+    <div class="ventures rise">
+      <div class="venture">
+        <span class="vn">RecoPick</span>
+        <p>빅데이터를 활용한 간편 추천 플랫폼</p>
+      </div>
+      <div class="venture">
+        <span class="vn">Weatherpong</span>
+        <p>SKT 기지국 기상 센서 설치를 통한 고해상도 기상정보 플랫폼</p>
+      </div>
+      <div class="venture">
+        <span class="vn">NearKids</span>
+        <p>영유아 대상 스마트 보육 플랫폼</p>
+      </div>
+      <div class="venture">
+        <span class="vn">Planett</span>
+        <p>데일리 미션 기반 글로벌 탐험 &amp; 소셜 네트워킹 플랫폼</p>
+      </div>
+    </div>
+    <p class="ventures-note rise">외 3D 공연사업 등 다수</p>
+  </div>
+</section>
+
+<!-- ══ 학력 ════════════════════════════════════ -->
+<section id="edu">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <h2>학력</h2>
+      <span class="count">고창 → 서울</span>
+    </div>
+    <div class="edu rise">
+      <span class="node">고창초</span><span class="arrow">→</span>
+      <span class="node">고창중</span><span class="arrow">→</span>
+      <span class="node">고창고</span><span class="arrow">→</span>
+      <span class="node">중앙대학교</span><span class="arrow">→</span>
+      <span class="node grad">연세대학교 대학원 · 프랜차이즈 경영</span>
+    </div>
+    <p class="edu-note rise">
+      전북 고창에서 초 · 중 · 고를 모두 마치고 서울로. 대학원 전공은 프랜차이즈 경영입니다.
+    </p>
+  </div>
+</section>
+
+<!-- ══ 채널 ════════════════════════════════════ -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <span class="eyebrow kr rise">읽어주셔서 고맙습니다</span>
+    <h2 class="rise" style="margin:1rem 0 1rem; font-size:clamp(1.375rem,4.5vw,2rem); font-weight:900; letter-spacing:-.04em; text-wrap:balance">
+      셀프브랜딩으로 나를 다시 쓰다
+    </h2>
+    <p class="lede rise" style="margin:0 0 1.75rem">
+      김상수라는 사람의 브랜드를 높이려고 하는 일들을 블로그에 적고 있습니다.
+      배우는 중에 쓰는 글이라 정답은 아니지만, 과정은 전부 남아 있습니다.
+    </p>
+
+    <ul class="topics rise">
+      <li>지식 쌓기</li>
+      <li>인맥 넓히기</li>
+      <li>커리어 강화</li>
+      <li>능력 키우기</li>
+      <li>AI 공부</li>
+    </ul>
+
+    <a class="cta rise" href="https://blog.naver.com/selfbranding" target="_blank" rel="noopener">
+      <span class="l">
+        <span class="k">Naver Blog · 주 채널</span>
+        <span class="v">blog.naver.com/selfbranding</span>
+      </span>
+      <span class="arw" aria-hidden="true">→</span>
+    </a>
+
+    <div class="links rise">
+      <a class="link" href="https://www.youtube.com/@%EB%A9%B4%ED%97%88%EC%99%95" target="_blank" rel="noopener">
+        <span class="k">YouTube</span><span class="v">@면허왕</span>
+      </a>
+      <a class="link" href="https://instagram.com/oscarsangsookim" target="_blank" rel="noopener">
+        <span class="k">Instagram</span><span class="v">@oscarsangsookim</span>
+      </a>
+      <a class="link" href="mailto:superssk74@gmail.com">
+        <span class="k">Email</span><span class="v">superssk74@gmail.com</span>
+      </a>
+      <a class="link" href="mailto:superssk74@gmail.com?subject=%EA%B0%95%EC%97%B0%20%C2%B7%20%ED%98%91%EC%97%85%20%EB%AC%B8%EC%9D%98">
+        <span class="k">문의</span><span class="v">강연 · 협업 제안 →</span>
+      </a>
+    </div>
+
+    <footer>
+      <span>김상수 · KIM SANGSOO</span>
+      <span>SK 25년 · 자격 15</span>
+    </footer>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var els = document.querySelectorAll('.rise');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+
+</body>
+</html>
