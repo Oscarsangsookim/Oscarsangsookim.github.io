@@ -453,9 +453,10 @@
   }
 
   /* ── 벤처 ──────────────────────────────────── */
-  .ventures { display: grid; gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); }
+  .ventures { display: grid; gap: 1px; background: var(--surface); border: 1px solid var(--rule-soft); }
   @media (min-width: 42rem) { .ventures { grid-template-columns: repeat(2, 1fr); } }
-  .venture { background: var(--surface); padding: 1.375rem 1.25rem; display: flex; flex-direction: column; gap: .375rem; }
+  /* 자격증 그리드와 같은 이유로 괘선은 셀 그림자로 그린다 (홀수 개일 때 빈 칸 방지) */
+  .venture { background: var(--surface); box-shadow: 0 0 0 1px var(--rule-soft); padding: 1.375rem 1.25rem; display: flex; flex-direction: column; gap: .375rem; }
   .venture .vn {
     font-family: var(--mono);
     font-size: .9375rem;
@@ -477,7 +478,6 @@
     border-radius: 2px;
     background: var(--surface);
   }
-  .edu .node.grad { border-color: var(--jade); color: var(--jade); }
   .edu .arrow { color: var(--ink-faint); font-family: var(--mono); font-size: .75rem; }
   .edu-note { margin: 1.25rem 0 0; font-size: .8125rem; color: var(--ink-soft); max-width: 36rem; line-height: 1.75; }
 
@@ -524,10 +524,11 @@
   .cta .v { font-size: clamp(1.0625rem, 3.4vw, 1.375rem); font-weight: 800; letter-spacing: -.03em; }
   .cta .arw { font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
 
-  .links { display: grid; gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); margin-top: 1.5rem; }
+  .links { display: grid; gap: 1px; background: var(--surface); border: 1px solid var(--rule-soft); margin-top: 1.5rem; }
   @media (min-width: 34rem) { .links { grid-template-columns: repeat(2, 1fr); } }
   .link {
     background: var(--surface);
+    box-shadow: 0 0 0 1px var(--rule-soft);
     text-decoration: none;
     color: inherit;
     padding: 1.125rem 1.25rem;
@@ -577,7 +578,7 @@
   <div class="wrap">
     <div class="nameplate">
       <span class="kr-name">김상수</span>
-      <span class="badge">면허왕</span>
+      <span class="badge">미스터엑시트</span>
       <span class="en">Kim Sangsoo</span>
     </div>
 
@@ -822,6 +823,10 @@
         <span class="vn">Planett</span>
         <p>데일리 미션 기반 글로벌 탐험 &amp; 소셜 네트워킹 플랫폼</p>
       </div>
+      <div class="venture">
+        <span class="vn">Flitto</span>
+        <p>세상의 모든 번역, 플리토</p>
+      </div>
     </div>
     <p class="ventures-note rise">외 3D 공연사업 등 다수</p>
   </div>
@@ -839,10 +844,10 @@
       <span class="node">고창중</span><span class="arrow">→</span>
       <span class="node">고창고</span><span class="arrow">→</span>
       <span class="node">중앙대학교</span><span class="arrow">→</span>
-      <span class="node grad">연세대학교 대학원 · 프랜차이즈 경영</span>
+      <span class="node">연세대학교 대학원 · 프랜차이즈 경영</span>
     </div>
     <p class="edu-note rise">
-      전북 고창에서 초 · 중 · 고를 모두 마치고 서울로. 대학원 전공은 프랜차이즈 경영입니다.
+      전북 고창에서 초중고를 모두 마치고 서울로 상경했습니다.
     </p>
   </div>
 </section>
@@ -884,9 +889,6 @@
       </a>
       <a class="link" href="mailto:superssk74@gmail.com">
         <span class="k">Email</span><span class="v">superssk74@gmail.com</span>
-      </a>
-      <a class="link" href="mailto:superssk74@gmail.com?subject=%EA%B0%95%EC%97%B0%20%C2%B7%20%ED%98%91%EC%97%85%20%EB%AC%B8%EC%9D%98">
-        <span class="k">문의</span><span class="v">강연 · 협업 제안 →</span>
       </a>
     </div>
 
