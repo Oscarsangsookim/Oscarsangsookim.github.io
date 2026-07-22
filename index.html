@@ -127,7 +127,7 @@
     gap: clamp(2rem, 5vw, 3rem);
   }
   @media (min-width: 56rem) {
-    .hero-grid { grid-template-columns: minmax(0,1fr) 16rem; align-items: start; }
+    .hero-grid { grid-template-columns: minmax(0,1fr) 19rem; align-items: start; }
   }
 
   .nameplate {
@@ -190,7 +190,7 @@
     --card-soft: #6E7A76;
     margin: 0;
     justify-self: start;
-    width: min(16rem, 82%);
+    width: min(19rem, 92%);
     background: var(--card);
     border: 1px solid var(--card-rule);
     border-radius: 3px;
@@ -199,8 +199,13 @@
     flex-direction: column;
     gap: .75rem;
     box-shadow: 0 1px 3px rgba(0,0,0,.07);
+    /* 마우스 3D 틸트 */
+    transform-style: preserve-3d;
+    transition: transform .16s ease, box-shadow .3s ease;
+    will-change: transform;
   }
   @media (min-width: 56rem) { .idcard { justify-self: end; width: 100%; } }
+  .idcard.tilting { box-shadow: 0 16px 36px rgba(0,0,0,.18); }
 
   .idcard-photo {
     position: relative;
@@ -208,6 +213,19 @@
     overflow: hidden;
     background: var(--card);
   }
+  /* 틸트 시 커서를 따라 흐르는 은은한 광택 */
+  .idcard-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%),
+                                rgba(255,255,255,.4), rgba(255,255,255,0) 55%);
+    mix-blend-mode: soft-light;
+    opacity: 0;
+    transition: opacity .3s ease;
+  }
+  .idcard.tilting .idcard-photo::after { opacity: 1; }
   .idcard-photo img {
     display: block;
     width: 100%;
@@ -897,6 +915,42 @@
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
     els.forEach(function (el) { io.observe(el); });
+  })();
+
+  /* ── 프로필 카드 마우스 3D 틸트 ─────────────── */
+  (function () {
+    var card = document.querySelector('.idcard');
+    if (!card) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var MAX = 9;          // 최대 기울기(도)
+    var raf = null, pending = null;
+
+    function apply() {
+      raf = null;
+      var e = pending;
+      var r = card.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width;   // 0~1
+      var py = (e.clientY - r.top) / r.height;   // 0~1
+      var ry = (px - 0.5) * (MAX * 2);
+      var rx = (0.5 - py) * (MAX * 2);
+      card.style.transform =
+        'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
+      card.style.setProperty('--gx', (px * 100).toFixed(1) + '%');
+      card.style.setProperty('--gy', (py * 100).toFixed(1) + '%');
+    }
+
+    card.addEventListener('pointermove', function (e) {
+      if (e.pointerType === 'touch') return;   // 터치 기기 제외
+      card.classList.add('tilting');
+      pending = e;
+      if (!raf) raf = requestAnimationFrame(apply);
+    });
+    card.addEventListener('pointerleave', function () {
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+      card.classList.remove('tilting');
+      card.style.transform = '';
+    });
   })();
 </script>
 
