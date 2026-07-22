@@ -459,12 +459,25 @@
   @media (min-width: 42rem) { .ventures { grid-template-columns: repeat(2, 1fr); } }
   /* 자격증 그리드와 같은 이유로 괘선은 셀 그림자로 그린다 (홀수 개일 때 빈 칸 방지) */
   .venture { background: var(--surface); box-shadow: 0 0 0 1px var(--rule-soft); padding: 1.375rem 1.25rem; display: flex; flex-direction: column; gap: .375rem; }
+  .venture .vn-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: .375rem .625rem; }
   .venture .vn {
     font-family: var(--mono);
     font-size: .9375rem;
     font-weight: 600;
     letter-spacing: -.01em;
     color: var(--ink);
+  }
+  .venture .v-status {
+    font-family: var(--mono);
+    font-size: .625rem;
+    font-weight: 500;
+    letter-spacing: .01em;
+    line-height: 1.5;
+    color: var(--jade);
+    background: var(--jade-soft);
+    border: 1px solid var(--jade-soft);
+    padding: .1rem .4rem;
+    border-radius: 3px;
   }
   .venture p { margin: 0; font-size: .8125rem; color: var(--ink-soft); line-height: 1.6; }
   .ventures-note { margin: 1rem 0 0; font-size: .8125rem; color: var(--ink-faint); }
@@ -502,30 +515,6 @@
     border-radius: 2px;
     padding: .3rem .625rem;
   }
-  .cta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    background: var(--jade);
-    color: var(--paper);
-    text-decoration: none;
-    padding: 1.5rem clamp(1.25rem, 4vw, 2rem);
-    border-radius: 3px;
-    transition: transform .18s ease, filter .18s ease;
-  }
-  .cta:hover { filter: brightness(1.08); transform: translateY(-2px); }
-  .cta .l { display: flex; flex-direction: column; gap: .3rem; }
-  .cta .k {
-    font-family: var(--mono);
-    font-size: .625rem;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    opacity: .8;
-  }
-  .cta .v { font-size: clamp(1.0625rem, 3.4vw, 1.375rem); font-weight: 800; letter-spacing: -.03em; }
-  .cta .arw { font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
-
   .links { display: grid; gap: 1px; background: var(--surface); border: 1px solid var(--rule-soft); margin-top: 1.5rem; }
   @media (min-width: 34rem) { .links { grid-template-columns: repeat(2, 1fr); } }
   .link {
@@ -557,7 +546,7 @@
   .rise.in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
     .rise { opacity: 1; transform: none; transition: none; }
-    .cta, .cert, .link { transition: none; }
+    .cert, .link { transition: none; }
     .seal svg { transform: rotate(-8deg); }
   }
 </style>
@@ -677,14 +666,14 @@
   <div class="wrap">
     <span class="eyebrow kr rise">왜 이렇게 사느냐 하면</span>
     <blockquote class="rise" style="margin-top:1.25rem">
-      새로운 분야를 만나면, 저는 시험부터 등록합니다.
+      새로운 일을 맡으면, 저는 배움의 끝에 시험 하나를 걸어둡니다.
       대충 아는 상태로 멈추지 않게 만드는 가장 확실한 장치니까요.
     </blockquote>
     <p class="after rise">
-      회계로 시작해 음원, 기업문화, 사내벤처, 미디어까지.
-      SK에서 25년간 맡은 일은 매번 낯선 영역이었습니다.
-      그때마다 살아남은 방법이 이것이었고, 자격증 15개는 그 습관이
-      회사 밖에서 남긴 흔적입니다.
+      회계업무로 시작해 음원, 기업문화, 사내벤처, 미디어까지.
+      SK에서 25년간 맡은 일은 매번 회사가 처음 시도하는, 낯설고 새로운 영역이었습니다.
+      낯선 자리에서 버텨낸 방법은 언제나 같았습니다 — 끝까지 파고들어 내 것으로 만드는 것.
+      자격증 15개는 그 습관이 회사 밖에 남긴 흔적입니다.
     </p>
     <p class="after rise">
       그래서 지금은 <strong>보컬 중급 과정</strong>을 준비하고 있습니다.
@@ -737,7 +726,7 @@
           <ul>
             <li><span class="yr">제도</span><span><mark>사내벤처 Planet X 기획 · 운영 · 고도화</mark></span></li>
             <li><span class="yr">제도</span><span>사내 아이디에이션 제도 기획 · 운영 · 고도화를 통한 혁신 기업문화 내재화 및 신규 사업 발굴</span></li>
-            <li><span class="yr">멘토링</span><span>사내벤처 멘토링 — RecoPick, Weatherpong, NearKids, Planett 외</span></li>
+            <li><span class="yr">멘토링</span><span>사내벤처 멘토링 — RecoPick, Weatherpong, NearKids, Flitto 외</span></li>
           </ul>
         </div>
       </div>
@@ -769,7 +758,7 @@
       <h2>사내벤처 제도를 세 번 설계했습니다</h2>
     </div>
     <p class="lede rise" style="margin-top:0; margin-bottom:2rem">
-      한 번은 운이지만 세 번이면 방법입니다.
+      한 번은 우연일 수 있어도, 세 번은 증명입니다.
     </p>
 
     <ol class="programs rise">
@@ -795,23 +784,31 @@
     </p>
     <div class="ventures rise">
       <div class="venture">
-        <span class="vn">RecoPick</span>
+        <div class="vn-row">
+          <span class="vn">RecoPick</span>
+          <span class="v-status">분사(Spin-off) → 데이블 → 야놀자클라우드 흡수합병</span>
+        </div>
         <p>빅데이터를 활용한 간편 추천 플랫폼</p>
       </div>
       <div class="venture">
-        <span class="vn">Weatherpong</span>
+        <div class="vn-row">
+          <span class="vn">Weatherpong</span>
+          <span class="v-status">사내 사업화(Spin-in)</span>
+        </div>
         <p>SKT 기지국 기상 센서 설치를 통한 고해상도 기상정보 플랫폼</p>
       </div>
       <div class="venture">
-        <span class="vn">NearKids</span>
+        <div class="vn-row">
+          <span class="vn">NearKids</span>
+          <span class="v-status">분사(Spin-off)</span>
+        </div>
         <p>영유아 대상 스마트 보육 플랫폼</p>
       </div>
       <div class="venture">
-        <span class="vn">Planett</span>
-        <p>데일리 미션 기반 글로벌 탐험 &amp; 소셜 네트워킹 플랫폼</p>
-      </div>
-      <div class="venture">
-        <span class="vn">Flitto</span>
+        <div class="vn-row">
+          <span class="vn">Flitto</span>
+          <span class="v-status">코스닥 상장</span>
+        </div>
         <p>세상의 모든 번역, 플리토</p>
       </div>
     </div>
@@ -857,15 +854,13 @@
       <li>AI 공부</li>
     </ul>
 
-    <a class="cta rise" href="https://blog.naver.com/myselfbranding" target="_blank" rel="noopener">
-      <span class="l">
-        <span class="k">Naver Blog · 주 채널</span>
-        <span class="v">blog.naver.com/myselfbranding</span>
-      </span>
-      <span class="arw" aria-hidden="true">→</span>
-    </a>
-
     <div class="links rise">
+      <a class="link" href="https://blog.naver.com/myselfbranding" target="_blank" rel="noopener" aria-label="네이버 블로그">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.27 12.85 7.5 0H0v24h7.73V11.15L16.5 24H24V0h-7.73z"/></svg>
+        </span>
+        <span class="v">blog.naver.com/myselfbranding</span>
+      </a>
       <a class="link" href="https://www.youtube.com/@%EB%A9%B4%ED%97%88%EC%99%95" target="_blank" rel="noopener" aria-label="유튜브 채널 면허왕">
         <span class="ico" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg>
